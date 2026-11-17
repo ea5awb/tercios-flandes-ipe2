@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Tercios del Emprendimiento — IPE2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="borde"><div class="hoja">
+
+<section id="inicio" class="pantalla activa">
+  <header>
+    <div class="titlebar">
+      <svg width="56" height="56" viewBox="0 0 100 100"><g stroke="#7e1b1e" stroke-width="13" stroke-linecap="round"><line x1="16" y1="16" x2="84" y2="84"/><line x1="84" y1="16" x2="16" y2="84"/></g><g fill="#b9892e"><circle cx="16" cy="16" r="7"/><circle cx="84" cy="84" r="7"/><circle cx="84" cy="16" r="7"/><circle cx="16" cy="84" r="7"/><circle cx="50" cy="50" r="8"/></g></svg>
+      <h1>Los Tercios del<br>Emprendimiento · IPE2</h1>
+      <svg width="56" height="56" viewBox="0 0 100 100"><g stroke="#7e1b1e" stroke-width="13" stroke-linecap="round"><line x1="16" y1="84" x2="84" y2="16"/><line x1="16" y1="16" x2="84" y2="84"/></g><g fill="#b9892e"><circle cx="16" cy="84" r="7"/><circle cx="84" cy="16" r="7"/><circle cx="16" cy="16" r="7"/><circle cx="84" cy="84" r="7"/><circle cx="50" cy="50" r="8"/></g></svg>
+    </div>
+    <p class="subtitulo">«El que no arriesga, no cruza Flandes: forma en cuadro, elige tu bandera y avanza.»</p>
+  </header>
+  <div class="selector-tema" id="selector-tema"></div>
+  <div class="tercios-menu">
+    <div class="estandarte" data-abrir="quiz">
+      <svg width="42" height="42" viewBox="0 0 100 100"><g stroke="#7e1b1e" stroke-width="14" stroke-linecap="round"><line x1="18" y1="18" x2="82" y2="82"/><line x1="82" y1="18" x2="18" y2="82"/></g><circle cx="50" cy="50" r="9" fill="#b9892e"/></svg>
+      <h3>Cuestionario</h3><p>Preguntas del tema elegido. Adelante y atrás, respuesta bloqueada, refuerzo didáctico, temporizador y nota sobre 10.</p>
+    </div>
+    <div class="estandarte" data-abrir="enlace">
+      <svg width="42" height="42" viewBox="0 0 100 100"><path d="M12 88 C40 88 60 12 88 12" stroke="#7e1b1e" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="12" cy="88" r="8" fill="#b9892e"/><circle cx="88" cy="12" r="8" fill="#b9892e"/></svg>
+      <h3>Enlazar conceptos</h3><p>Une concepto y definición con flechas. Verde si aciertas, rojo si fallas.</p>
+    </div>
+    <div class="estandarte" data-abrir="frases">
+      <svg width="42" height="42" viewBox="0 0 100 100"><path d="M18 20 H82 M18 50 H70 M18 80 H50" stroke="#7e1b1e" stroke-width="10" stroke-linecap="round"/><path d="M70 80 v-14 l16 14 l-16 14 z" fill="#b9892e"/></svg>
+      <h3>Completar frase</h3><p>Huecos con la palabra clave que sostiene el concepto.</p>
+    </div>
+    <div class="estandarte" data-abrir="repaso">
+      <svg width="42" height="42" viewBox="0 0 100 100"><rect x="16" y="18" width="68" height="64" fill="none" stroke="#7e1b1e" stroke-width="8"/><path d="M30 36 H70 M30 54 H70 M30 72 H56" stroke="#b9892e" stroke-width="7" stroke-linecap="round"/></svg>
+      <h3>Tema de repaso</h3><p>Temario didáctico con ideas clave, chuletas y resumen del resumen.</p>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:24px; font-size:.84rem; color:var(--tinta2); font-style:italic;">
+    Capitán: ajusta tiempos y umbrales en el bloque <b>PARÁMETROS DE MANDO</b> del código.<br>
+    Sonidos propios (opcional): coloca <b>acierto.mp3</b>, <b>fallo.mp3</b> o <b>fanfarria.mp3</b> junto a este archivo, en la carpeta <b>sonidos/</b>.
+  </p>
+</section>
+
+<section id="quiz" class="pantalla">
+  <div class="hud">
+    <span class="vidas" id="q-marca">✦ Cuestionario</span>
+    <span>Acertadas: <b id="q-ok">0</b> · Falladas: <b id="q-ko">0</b></span>
+    <span class="temporizador" id="q-temp">--:--</span>
+    <button class="btn sec" onclick="lienzo('inicio')">Retirada al campamento</button>
+  </div>
+  <div class="barra-progreso"><div id="q-progreso" style="width:0%"></div></div>
+  <div id="q-juego">
+    <div class="pregunta-cartulina">
+      <div class="pregunta-num" id="q-num"></div>
+      <h2 id="q-texto"></h2>
+      <div id="q-opciones"></div>
+      <div class="refuerzo" id="q-refuerzo" style="display:none"></div>
+      <div class="nav-test">
+        <button class="btn sec" id="q-prev" onclick="navQuiz(-1)">&laquo; Anterior</button>
+        <button class="btn" id="q-next" onclick="navQuiz(1)">Siguiente &raquo;</button>
+      </div>
+    </div>
+  </div>
+  <div id="q-final" class="panel-resultado" style="display:none"></div>
+</section>
+
+<section id="enlace" class="pantalla">
+  <div class="hud">
+    <span class="vidas">✦ Enlaza concepto con definición</span>
+    <span>Acertadas: <b id="e-ok">0</b> · Falladas: <b id="e-ko">0</b></span>
+    <span class="temporizador" id="e-temp">--:--</span>
+    <button class="btn sec" onclick="lienzo('inicio')">Retirada al campamento</button>
+  </div>
+  <div class="barra-progreso"><div id="e-progreso" style="width:0%"></div></div>
+  <div class="tablero-enlace" id="e-tablero">
+    <svg class="flechas" id="e-flechas"><defs><marker id="punta-verde" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2e6b2e"/></marker><marker id="punta-roja" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8f1d1d"/></marker></defs></svg>
+    <div class="col"><h3>Conceptos</h3><div id="e-izq"></div></div>
+    <div class="col"><h3>Definiciones</h3><div id="e-der"></div></div>
+  </div>
+  <p class="refuerzo" id="e-refuerzo" style="display:none"></p>
+  <div class="nav-test" style="margin-top:16px"><span></span><button class="btn" id="e-finalizar" style="display:none" onclick="finalEnlace()">Formar cuadro: terminar</button></div>
+  <div id="e-final" class="panel-resultado" style="display:none"></div>
+</section>
+
+<section id="frases" class="pantalla">
+  <div class="hud">
+    <span class="vidas">✦ Rellena el hueco con la palabra clave</span>
+    <span>Acertadas: <b id="f-ok">0</b> · Falladas: <b id="f-ko">0</b></span>
+    <span class="temporizador" id="f-temp">--:--</span>
+    <button class="btn sec" onclick="lienzo('inicio')">Retirada al campamento</button>
+  </div>
+  <div class="barra-progreso"><div id="f-progreso" style="width:0%"></div></div>
+  <div id="f-lista"></div>
+  <div id="f-final" class="panel-resultado" style="display:none"></div>
+</section>
+
+<section id="repaso" class="pantalla tema">
+  <div class="hud">
+    <span class="vidas">✦ Tema de repaso — IPE2</span>
+    <button class="btn sec" onclick="lienzo('inicio')">Retirada al campamento</button>
+  </div>
+  <div class="pestañas" id="pestañas-repaso"></div>
+  <div id="contenido-repaso"></div>
+</section>
+
+</div></div>
+<canvas id="lienzo-confeti" style="display:none"></canvas>
+<script src="datos-ud3.js"></script>
+<script src="datos-ud4.js"></script>
+<script src="datos-ud5.js"></script>
+<script src="repaso.js"></script>
+<script src="motor.js"></script>
+</body>
+</html>
