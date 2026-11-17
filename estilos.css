@@ -1,0 +1,154 @@
+:root{
+  --parche:#e9dcb8; --parche2:#f3ead0; --tinta:#2b2118; --tinta2:#4a3826;
+  --carmesi:#7e1b1e; --carmesi-osc:#5a1013; --oro:#b9892e; --oro-claro:#d4af5a;
+  --pardo:#3c2f22; --verde:#2e6b2e; --rojo:#8f1d1d;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{
+  font-family:"IM Fell English","Palatino Linotype","Book Antiqua",Georgia,serif;
+  color:var(--tinta);
+  background:
+    repeating-linear-gradient(0deg, rgba(120,90,40,.045) 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(90deg, rgba(90,60,25,.03) 0 3px, transparent 3px 7px),
+    radial-gradient(ellipse at 20% 15%, #d8c493 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 80%, #d3bd8b 0%, transparent 50%),
+    linear-gradient(160deg,#e2d3a8 0%, #dcc999 40%, #d0bc8a 100%);
+  min-height:100vh;
+}
+.borde{
+  max-width:980px; margin:18px auto 40px; padding:6px;
+  background:linear-gradient(135deg,var(--pardo),#241b12);
+  border-radius:6px;
+  box-shadow:0 14px 40px rgba(30,15,5,.55), inset 0 0 0 2px var(--oro);
+}
+.hoja{
+  background:
+    radial-gradient(circle at 8% 6%, rgba(126,27,30,.06), transparent 18%),
+    radial-gradient(circle at 93% 92%, rgba(126,27,30,.05), transparent 15%),
+    repeating-linear-gradient(0deg, rgba(110,80,30,.03) 0 2px, transparent 2px 6px),
+    var(--parche);
+  border-radius:3px; padding:26px 34px 40px;
+  box-shadow:inset 0 0 40px rgba(90,60,20,.25);
+}
+header{text-align:center; margin-bottom:10px;}
+h1{
+  font-family:"IM Fell English SC",Georgia,serif; font-size:clamp(1.4rem,4.2vw,2.2rem);
+  color:var(--carmesi); letter-spacing:.06em; text-shadow:1px 1px 0 var(--oro-claro);
+}
+.titlebar{display:flex; align-items:center; gap:12px; justify-content:center; border-bottom:3px double var(--oro); padding-bottom:10px; margin-bottom:8px;}
+.subtitulo{font-style:italic; color:var(--tinta2); margin-top:4px; font-size:.98rem;}
+.btn{
+  display:inline-block; cursor:pointer; border:none;
+  font-family:"IM Fell English SC",Georgia,serif; font-size:1.02rem; letter-spacing:.05em;
+  color:#f4e8cf; background:linear-gradient(180deg,var(--carmesi),var(--carmesi-osc));
+  padding:12px 22px; border-radius:5px; border:1px solid #3c090b;
+  box-shadow:inset 0 1px 0 rgba(255,220,150,.35), 0 4px 8px rgba(40,15,5,.45);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover:not([disabled]){transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,220,150,.35), 0 7px 14px rgba(40,15,5,.5);}
+.btn:active{transform:translateY(1px);}
+.btn.oro{background:linear-gradient(180deg,var(--oro),#8a6320); border-color:#5a400e; color:#241708;}
+.btn.sec{background:linear-gradient(180deg,#5d4a31,#3c2f22); border-color:#241b12;}
+.btn[disabled]{opacity:.45; cursor:not-allowed;}
+/* selector de tema */
+.selector-tema{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:18px 0 8px;}
+.sel-bandera{
+  cursor:pointer; padding:9px 16px; border-radius:5px;
+  font-family:"IM Fell English SC",Georgia,serif; font-size:.95rem;
+  background:var(--parche2); color:var(--tinta2); border:2px solid #a08a55;
+}
+.sel-bandera.activa{background:linear-gradient(180deg,var(--carmesi),var(--carmesi-osc)); color:#f4e8cf; border-color:#3c090b; box-shadow:0 3px 8px rgba(40,15,5,.4);}
+.tercios-menu{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:18px;}
+.estandarte{
+  position:relative; cursor:pointer; text-align:center; padding:24px 14px 18px;
+  background:linear-gradient(180deg,var(--parche2),#e6d5ab);
+  border:2px solid var(--pardo); border-radius:6px;
+  box-shadow:0 6px 14px rgba(40,20,5,.35), inset 0 0 0 1px var(--oro);
+  transition:transform .15s ease;
+}
+.estandarte:hover{transform:translateY(-4px) scale(1.02);}
+.estandarte::before{content:""; position:absolute; top:-14px; left:50%; transform:translateX(-50%); width:38px; height:14px; background:linear-gradient(180deg,var(--pardo),#241b12); border-radius:0 0 6px 6px;}
+.estandarte h3{font-family:"IM Fell English SC",Georgia,serif; color:var(--carmesi); font-size:1.1rem;}
+.estandarte p{font-size:.84rem; color:var(--tinta2); margin-top:6px;}
+.hud{
+  display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between;
+  background:linear-gradient(180deg,#3c2f22,#2a2014); color:#eadfb8;
+  padding:10px 16px; border-radius:6px; margin-bottom:18px;
+  box-shadow:inset 0 0 0 1px var(--oro);
+}
+.hud .vidas{font-family:"IM Fell English SC",Georgia,serif; letter-spacing:.04em;}
+.temporizador{font-size:1.3rem; font-weight:bold; color:var(--oro-claro); font-variant-numeric:tabular-nums; cursor:default;}
+.temporizador.urgente{color:#ff9b8a; animation:latido 1s infinite;}
+@keyframes latido{50%{transform:scale(1.18);}}
+.barra-progreso{height:10px; background:#3c2f22; border-radius:5px; overflow:hidden; margin-bottom:16px; box-shadow:inset 0 1px 3px rgba(0,0,0,.6);}
+.barra-progreso>div{height:100%; background:linear-gradient(90deg,var(--carmesi),var(--oro)); transition:width .3s;}
+.pregunta-cartulina{background:var(--parche2); border:2px solid var(--pardo); border-radius:6px; padding:22px 24px; box-shadow:0 5px 12px rgba(40,20,5,.3), inset 0 0 0 1px var(--oro-claro);}
+.pregunta-num{font-family:"IM Fell English SC",Georgia,serif; color:var(--oro); font-size:.95rem;}
+.pregunta-cartulina h2{font-size:1.2rem; margin:6px 0 18px; line-height:1.35;}
+.opcion{
+  display:block; width:100%; text-align:left; cursor:pointer; margin:8px 0;
+  background:#f6efdb; border:1.5px solid #a08a55; border-radius:5px;
+  padding:12px 14px; font-family:inherit; font-size:1rem; color:var(--tinta); transition:background .12s;
+}
+.opcion:hover:not([disabled]){background:#efe3bd;}
+.opcion[disabled]{cursor:default;}
+.opcion.acierto{background:#d5ecd0 !important; border-color:var(--verde); font-weight:bold;}
+.opcion.fallo{background:#f2cfcf !important; border-color:var(--rojo);}
+.refuerzo{margin-top:16px; padding:14px 16px; border-left:5px solid var(--verde); background:rgba(46,107,46,.09); border-radius:0 6px 6px 0; font-size:.97rem; line-height:1.5;}
+.refuerzo.malo{border-left-color:var(--rojo); background:rgba(143,29,29,.08);}
+.refuerzo b{font-family:"IM Fell English SC",Georgia,serif; color:var(--carmesi);}
+.nav-test{display:flex; justify-content:space-between; margin-top:18px; gap:10px; flex-wrap:wrap;}
+.tablero-enlace{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+.tablero-enlace svg.flechas{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:5; overflow:visible;}
+.col h3{font-family:"IM Fell English SC",Georgia,serif; color:var(--carmesi); text-align:center; border-bottom:2px solid var(--oro); padding-bottom:6px; margin-bottom:12px;}
+.ficha{
+  display:block; width:100%; margin:8px 0; padding:11px 12px; cursor:pointer;
+  font-family:inherit; font-size:.93rem; text-align:left; color:var(--tinta);
+  background:var(--parche2); border:1.5px solid #a08a55; border-radius:5px; transition:background .1s;
+}
+.ficha:hover:not([disabled]){background:#efe3bd;}
+.ficha.selec{outline:3px solid var(--oro); background:#f0e2b6;}
+.ficha.acierto{background:#d5ecd0; border-color:var(--verde); font-weight:bold; cursor:default;}
+.ficha.resplandor{animation:resplandor .45s 2;}
+@keyframes resplandor{0%,100%{background:#f2cfcf;}50%{background:#e07070;}}
+.ficha[disabled]{cursor:default;}
+.frase-item{background:var(--parche2); border:2px solid var(--pardo); border-radius:6px; padding:16px 18px; margin:14px 0; box-shadow:inset 0 0 0 1px var(--oro-claro);}
+.frase-item.acierto{border-color:var(--verde); background:#e0f0db;}
+.frase-item.fallo{border-color:var(--rojo); background:#f4dcdc;}
+.frase-item p{font-size:1.03rem; line-height:1.55; margin-bottom:10px;}
+.hueco{
+  font-family:inherit; font-size:1rem; color:var(--carmesi); font-weight:bold;
+  border:none; outline:none; background:rgba(126,27,30,.08);
+  border-bottom:2px dashed var(--carmesi); padding:2px 8px; width:180px; text-align:center;
+}
+.hueco[disabled]{color:inherit; font-weight:bold;}
+.hueco.bien{color:var(--verde);} .hueco.mal{color:var(--rojo); text-decoration:line-through;}
+.corrige{color:var(--verde); font-weight:bold;}
+.tema h2{font-family:"IM Fell English SC",Georgia,serif; color:var(--carmesi); font-size:1.4rem; border-bottom:3px double var(--oro); padding-bottom:6px; margin:30px 0 14px;}
+.tema h3{color:var(--carmesi-osc); margin:20px 0 8px; font-size:1.12rem;}
+.tema p{line-height:1.6; margin:8px 0;}
+.tema ul,.tema ol{margin:8px 0 8px 26px; line-height:1.55;}
+.chuleta{background:linear-gradient(180deg,#f3e9c8,#ecdfb6); border:2px dashed var(--carmesi); border-radius:6px; padding:14px 18px; margin:16px 0;}
+.chuleta h4{font-family:"IM Fell English SC",Georgia,serif; color:var(--carmesi); margin-bottom:8px;}
+.chuleta table,.tabla{width:100%; border-collapse:collapse; font-size:.9rem;}
+.chuleta td,.chuleta th,.tabla td,.tabla th{border:1px solid #a08a55; padding:6px 9px; text-align:left; line-height:1.4; vertical-align:top;}
+.chuleta th,.tabla th{background:var(--carmesi); color:#f4e8cf; font-family:"IM Fell English SC",Georgia,serif;}
+.idea-clave{display:inline-block; background:var(--oro); color:#241708; font-weight:bold; padding:1px 7px; border-radius:4px; font-size:.88em;}
+.pestañas{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+.panel-resultado{text-align:center; padding:26px 14px;}
+.nota-grande{font-family:"IM Fell English SC",Georgia,serif; font-size:4rem; color:var(--carmesi); text-shadow:2px 2px 0 var(--oro-claro);}
+.stats{display:flex; justify-content:center; gap:26px; margin:16px 0; flex-wrap:wrap;}
+.stat{background:var(--parche2); border:2px solid var(--pardo); border-radius:6px; padding:12px 24px; box-shadow:inset 0 0 0 1px var(--oro-claro);}
+.stat .v{font-size:1.8rem; font-weight:bold; color:var(--pardo);}
+.stat .l{font-size:.84rem; color:var(--tinta2);}
+.stat.ok .v{color:var(--verde);} .stat.ko .v{color:var(--rojo);}
+.mensaje-final{font-style:italic; font-size:1.08rem; margin:10px auto 4px; max-width:640px;}
+#lienzo-confeti{position:fixed; inset:0; pointer-events:none; z-index:60;}
+.calavera{position:fixed; inset:0; z-index:70; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(20,10,5,.88); color:#f4e8cf;}
+.calavera .fosas{font-size:8rem; animation:carcajada .55s infinite alternate;}
+@keyframes carcajada{from{transform:rotate(-9deg) scale(1);} to{transform:rotate(9deg) scale(1.12);}}
+.calavera .veredicto{font-family:"IM Fell English SC",Georgia,serif; font-size:clamp(1.8rem,6vw,3.2rem); color:#d43f3f; margin-top:12px; text-align:center;}
+.calavera .btn{margin-top:26px;}
+.pantalla{display:none;}
+.pantalla.activa{display:block;}
+@media (max-width:640px){ .tablero-enlace{gap:70px;} .hoja{padding:18px 12px 30px;} }
