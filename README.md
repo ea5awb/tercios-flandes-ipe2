@@ -4,9 +4,10 @@ Guía de estudio interactiva con estética de los **Tercios viejos de Flandes** 
 
 ## Cómo usarla
 
-1. Descarga `tercios-flandes-ipe2.html` y ábrelo con doble clic en cualquier navegador (funciona sin internet).
-2. Elige bandera: **UD 3 · El emprendimiento**, **UD 4 · El cliente y la idea**, **UD 5 · El entorno y la competencia**, o **toda la campaña** (los tres temas juntos).
-3. Elige modalidad:
+1. Pulsa el botón verde **Code → Download ZIP** y descomprime la carpeta.
+2. Abre **`app.html`** con doble clic en cualquier navegador (funciona sin internet; las letras antiguas(delay) se sustituyen por clásicas si no hay conexión).
+3. Elige bandera: **UD 3 · El emprendimiento**, **UD 4 · El cliente y la idea**, **UD 5 · El entorno y la competencia**, o **toda la campaña** (los tres temas juntos).
+4. Elige modalidad:
 
 | Estandarte | Qué hace |
 |---|---|
@@ -17,10 +18,14 @@ Guía de estudio interactiva con estética de los **Tercios viejos de Flandes** 
 
 En cada partida **se barajan** preguntas y respuestas. Sonidos integrados: aplauso al acertar y trompeta de fracaso al fallar (síntesis de audio, sin archivos externos).
 
+## Archivos
+
+`app.html` (la aplicación), `estilos.css`, `datos-ud3.js`, `datos-ud4.js`, `datos-ud5.js`, `repaso.js` (temarios) y `motor.js` (juego). Deben ir todos juntos en la misma carpeta.
+
 ## Sonidos propios (opcional)
 
-Crea una carpeta `sonidos/` junto al HTML con `acierto.mp3`, `fallo.mp3` o `fanfarria.mp3` y el script los usará automáticamente en lugar de la síntesis.
+Crea una carpeta `sonidos/` junto a `app.html` con `acierto.mp3`, `fallo.mp3` o `fanfarria.mp3` y el script los usará automáticamente en lugar de la síntesis.
 
 ## Configuración
 
-Abre el HTML con un editor de texto y busca el bloque `PARÁMETROS DE MANDO`: tiempo por pregunta/pareja/frase, umbral del confeti (91 %) y de la calavera (65 %), y rutas de sonidos.
+Abre `motor.js` con un editor de texto y busca el bloque `PARAMETROS`: tiempo por pregunta/pareja/frase, umbral del confeti (91 %) y de la calavera (65 %), y rutas de sonidos.
