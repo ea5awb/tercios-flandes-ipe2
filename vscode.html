@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPE2 · Estudio Interactivo — ed. Visual Studio Code</title>
+<link rel="stylesheet" href="estilos-vscode.css">
+</head>
+<body>
+<div class="ventana">
+
+  <div class="titlebar">
+    <span class="puntos"><i></i><i></i><i></i></span>
+    <span class="tituloDoc">ipe2-estudio — Visual Tercios Code</span>
+    <span class="dop">IPE2 · Emprendimiento</span>
+  </div>
+
+  <div class="workarea">
+
+    <nav class="activitybar">
+      <button class="estandarte activa" data-abrir="inicio" title="Bienvenida">⌂</button>
+      <button class="estandarte" data-abrir="quiz" title="Cuestionario">✓</button>
+      <button class="estandarte" data-abrir="enlace" title="Enlazar conceptos">⇄</button>
+      <button class="estandarte" data-abrir="frases" title="Completar frase">✎</button>
+      <button class="estandarte" data-abrir="repaso" title="Tema de repaso">▤</button>
+    </nav>
+
+    <aside class="sidebar">
+      <h3>Explorador</h3>
+      <h4>IPE2 · Modalidades</h4>
+      <div class="arbol">
+        <button class="estandarte" data-abrir="quiz"><span class="icono">▸</span> cuestionario.md</button>
+        <button class="estandarte" data-abrir="enlace"><span class="icono">▸</span> enlazar.md</button>
+        <button class="estandarte" data-abrir="frases"><span class="icono">▸</span> completar-frase.md</button>
+        <button class="estandarte" data-abrir="repaso"><span class="icono">▸</span> tema-repaso.md</button>
+      </div>
+      <h4>Unidad de estudio</h4>
+      <div class="arbol" id="selector-tema"></div>
+      <p class="arbol-detalle">Las preguntas y respuestas se barajan en cada partida. 84 preguntas · 34 parejas · 29 frases.</p>
+    </aside>
+
+    <main class="editors">
+
+      <div class="tabbar">
+        <button class="estandarte" data-abrir="inicio"><span class="tab"></span> bienvenida</button>
+        <button class="estandarte" data-abrir="quiz"><span class="tab"></span> cuestionario</button>
+        <button class="estandarte" data-abrir="enlace"><span class="tab"></span> enlazar</button>
+        <button class="estandarte" data-abrir="frases"><span class="tab"></span> completar-frase</button>
+        <button class="estandarte" data-abrir="repaso"><span class="tab"></span> tema-repaso</button>
+      </div>
+
+      <section id="inicio" class="pantalla activa">
+        <h2 style="color:#e7e7e7; font-size:1.25rem; margin-top:4px;">Bienvenido, capitán 👋</h2>
+        <p style="color:#a7a7a7; font-size:.88rem; margin-top:6px;">Guía interactiva del módulo IPE2. Elige una tarjeta o cualquier elemento del explorador. Tema oscuro, sin adjetivos.</p>
+        <div class="walkthrough">
+          <button class="estandarte tarjeta" data-abrir="quiz">
+            <h3>✓ Cuestionario</h3>
+            <p>84 preguntas con avance y retroceso, respuesta bloqueada, refuerzo didáctico, temporizador y nota sobre 10 con porcentajes.</p>
+          </button>
+          <button class="estandarte tarjeta" data-abrir="enlace">
+            <h3>⇄ Enlazar conceptos</h3>
+            <p>Une concepto y definición con flechas. Verde si aciertas, rojo si fallas, con explicación al momento.</p>
+          </button>
+          <button class="estandarte tarjeta" data-abrir="frases">
+            <h3>✎ Completar frase</h3>
+            <p>29 huecos con la palabra clave que sostiene cada concepto. Acepta la respuesta con o sin acentos.</p>
+          </button>
+          <button class="estandarte tarjeta" data-abrir="repaso">
+            <h3>▤ Tema de repaso</h3>
+            <p>Temario condensado de las UD 3, 4 y 5: ideas clave, chuletas en tabla, resumen del resumen y glosario.</p>
+          </button>
+        </div>
+        <div class="notaEditor">
+          💡 Parámetros: abre <b>motor.js</b> y edita el bloque <b>PARAMETROS</b> (tiempos por pregunta/pareja/frase, umbral del confeti: 91 %, umbral de la calavera: 65 %).<br>
+          🔊 Sonidos propios (opcional): carpeta <b>sonidos/</b> con <b>acierto.mp3</b>, <b>fallo.mp3</b> o <b>fanfarria.mp3</b>.
+        </div>
+      </section>
+
+      <section id="quiz" class="pantalla">
+        <div class="breadcrumbs">
+          <span class="vidas" id="q-marca">✓ Cuestionario</span>
+          <span>Acertadas: <b id="q-ok">0</b> · Falladas: <b id="q-ko">0</b></span>
+          <span class="temporizador" id="q-temp">--:--</span>
+          <button class="btn sec" onclick="lienzo('inicio')">cerrar</button>
+        </div>
+        <div class="barra-progreso"><div id="q-progreso" style="width:0%"></div></div>
+        <div id="q-juego">
+          <div class="pregunta-cartulina">
+            <div class="pregunta-num" id="q-num"></div>
+            <h2 id="q-texto"></h2>
+            <div id="q-opciones"></div>
+            <div class="refuerzo" id="q-refuerzo" style="display:none"></div>
+            <div class="nav-test">
+              <button class="btn sec" id="q-prev" onclick="navQuiz(-1)">« Anterior</button>
+              <button class="btn" id="q-next" onclick="navQuiz(1)">Siguiente »</button>
+            </div>
+          </div>
+        </div>
+        <div id="q-final" class="panel-resultado" style="display:none"></div>
+      </section>
+
+      <section id="enlace" class="pantalla">
+        <div class="breadcrumbs">
+          <span class="vidas">✓ Enlaza concepto con definición</span>
+          <span>Acertadas: <b id="e-ok">0</b> · Falladas: <b id="e-ko">0</b></span>
+          <span class="temporizador" id="e-temp">--:--</span>
+          <button class="btn sec" onclick="lienzo('inicio')">cerrar</button>
+        </div>
+        <div class="barra-progreso"><div id="e-progreso" style="width:0%"></div></div>
+        <div class="tablero-enlace" id="e-tablero">
+          <svg class="flechas" id="e-flechas"><defs><marker id="punta-verde" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4ec9b0"/></marker><marker id="punta-roja" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f44747"/></marker></defs></svg>
+          <div class="col"><h3>Conceptos</h3><div id="e-izq"></div></div>
+          <div class="col"><h3>Definiciones</h3><div id="e-der"></div></div>
+        </div>
+        <p class="refuerzo" id="e-refuerzo" style="display:none"></p>
+        <div class="nav-test" style="margin-top:14px"><span></span><button class="btn" id="e-finalizar" style="display:none" onclick="finalEnlace()">Finalizar ronda</button></div>
+        <div id="e-final" class="panel-resultado" style="display:none"></div>
+      </section>
+
+      <section id="frases" class="pantalla">
+        <div class="breadcrumbs">
+          <span class="vidas">✎ Rellena el hueco con la palabra clave</span>
+          <span>Acertadas: <b id="f-ok">0</b> · Falladas: <b id="f-ko">0</b></span>
+          <span class="temporizador" id="f-temp">--:--</span>
+          <button class="btn sec" onclick="lienzo('inicio')">cerrar</button>
+        </div>
+        <div class="barra-progreso"><div id="f-progreso" style="width:0%"></div></div>
+        <div id="f-lista"></div>
+        <div id="f-final" class="panel-resultado" style="display:none"></div>
+      </section>
+
+      <section id="repaso" class="pantalla tema">
+        <div class="breadcrumbs">
+          <span class="vidas">▤ Tema de repaso — IPE2</span>
+          <button class="btn sec" onclick="lienzo('inicio')">cerrar</button>
+        </div>
+        <div class="pestañas" id="pestañas-repaso"></div>
+        <div id="contenido-repaso"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="statusbar">
+    <span class="celda"><span>⎇ main</span><span>IPE2 · Emprendimiento</span></span>
+    <span class="celda"><span>84 preguntas</span><span>34 parejas</span><span>29 frases</span><span>UTF-8</span></span>
+  </div>
+
+</div>
+<canvas id="lienzo-confeti" style="display:none"></canvas>
+<script src="datos-ud3.js"></script>
+<script src="datos-ud4.js"></script>
+<script src="datos-ud5.js"></script>
+<script src="repaso.js"></script>
+<script src="motor.js"></script>
+</body>
+</html>
