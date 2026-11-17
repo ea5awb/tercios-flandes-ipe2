@@ -5,7 +5,7 @@ Guía de estudio interactiva con estética de los **Tercios viejos de Flandes** 
 ## Cómo usarla
 
 1. Pulsa el botón verde **Code → Download ZIP** y descomprime la carpeta.
-2. Abre **`app.html`** con doble clic en cualquier navegador (funciona sin internet; las letras antiguas(delay) se sustituyen por clásicas si no hay conexión).
+2. Abre **`app.html`** con doble clic en cualquier navegador (funciona sin internet; sin conexión se usan las letras clásicas en lugar de las antiguas).
 3. Elige bandera: **UD 3 · El emprendimiento**, **UD 4 · El cliente y la idea**, **UD 5 · El entorno y la competencia**, o **toda la campaña** (los tres temas juntos).
 4. Elige modalidad:
 
